@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      let person = {};
+
+      //   //如下這樣寫會無限循環
+      //   //set get 的 this 都是當前對象
+      //   Object.defineProperty(person, "name", {
+      //     //當修改person.name時, set被調用, set會收到新的值
+      //     set() {
+      //       console.log("set被調用了", value);
+      //       this.name = value;
+      //     },
+      //     //當讀取person.name時, get被調用, get的返回值就是name的值
+      //     get() {
+      //       console.log("get被調用了");
+      //       return 100;
+      //     },
+      //   });
+      //   person.name = "liu";
+
+      //模擬數據代理
+      let _data = { msg: "atguigu" };
+      let vm = {};
+      Object.defineProperty(vm, "msg", {
+        set(value) {
+          _data.msg = value;
+        },
+        get() {
+          return _data.msg;
+        },
+      });
+      console.log(vm);
+    </script>
+  </body>
+</html>

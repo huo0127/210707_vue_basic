@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>數據代理</title>
+  </head>
+  <body>
+    <!-- 
+          關於Vue中的數據代理:
+            1.甚麼是數據代理?
+                (1).配置對象data中的數據, 會被收集到vm._data中, 然後通過 
+                    Object.defineProperty讓vm上擁有data中所有的屬性
+                (2).當訪問vm的msg時, 返回的是_data當中同名屬性的值
+                (3).當修改vm的msg時, 修改的是_data當中同名屬性的值
+            2.為什麼要數據代理?
+                為了更佳方便的讀取和修改_data中的數據, 如果不做數據代理的話, 就要
+                vm._data.xxx訪問數據
+            3.擴展思考 ---- 為什麼要先收集在_data中, 然後再代理出去?
+                更高校的監視數據 (直接收集到vm上會導致監視效率太低)
+       -->
+  </body>
+</html>
