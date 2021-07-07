@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <title>MVVM模型</title>
+  </head>
+  <body>
+    <div>
+      <div id="root">
+        <h2>Hello, {{msg}}</h2>
+        <h2>地址是: {{address}}</h2>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    // el 第一種寫法(常用)
+    // new Vue({
+    //   el: "#root",
+    //   data: {
+    //     msg: "atguigu",
+    //     address: "洪福科技園綜合樓",
+    //   },
+    // });
+
+    // el 第二種寫法(不常用)
+    // const vm = new Vue({
+    //   data: {
+    //     msg: "atuguigu",
+    //     address: "洪福科技園綜合樓",
+    //   },
+    // });
+    // vm.$mount("#root");
+
+    // data 第一種寫法, data是一個對象
+    // new Vue({
+    //   el: "#root",
+    //   data: {
+    //     msg: "atguigu",
+    //     address: "洪福科技園綜合樓",
+    //   },
+    // });
+
+    // data的第二種寫法, data是一個函數, 返回數據對象 (組件用的多)
+    // 特別注意: data不要寫成箭頭函數, 要寫成普通函數, 否則this的指向就是Window, 而不是
+    //          Vue的實例對象
+    new Vue({
+      el: "#root",
+      data() {
+        return {
+          msg: "atguigu",
+          address: "洪福科技園綜合樓",
+        };
+      },
+    });
+  </script>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <title>data和el的兩種寫法</title>
+  </head>
+  <body>
+    <!-- 
+      data與el的兩種寫法:
+        1.el有兩種寫法:
+          (1).new Vue的時候傳遞 el 屬性 -----常用
+          (2).先new Vue 在通過vm.$mount(#root)指定el屬性 -----不常用
+        2.data有兩種寫法
+          (1).對象式: 非組件化編碼時可以寫對象, 也可以寫函數
+          (2).函數式: 組件化編碼必須使用函數式的data
+      Vue中的一個最重要的原則:
+        由Vue所調用的函數, 都不要寫成箭頭函數, 一旦寫了箭頭函數, this就不對了;
+        (或許是undefined或者是Window)
+   -->
+    <!-- 準備一個容器 -->
+    <div>
+      <div id="root">
+        <h2>Hello, {{msg}}</h2>
+        <h2>地址是: {{address}}</h2>
+      </div>
+    </div>
+  </body>
+
+  <script type="text/javascript">
+    // el 第一種寫法(常用)----new Vue時直接指定el的值
+    // new Vue({
+    //   el: "#root",
+    //   data: {
+    //     msg: "atguigu",
+    //     address: "洪福科技園綜合樓",
+    //   },
+    // });
+
+    // el 第二種寫法(不常用)----先new Vue, 後期透過vm.$mount(el)指定el的值
+    // const vm = new Vue({
+    //   data: {
+    //     msg: "atuguigu",
+    //     address: "洪福科技園綜合樓",
+    //   },
+    // });
+    // vm.$mount("#root");
+
+    // data 第一種寫法, data是一個對象
+    // new Vue({
+    //   el: "#root",
+    //   data: {
+    //     msg: "atguigu",
+    //     address: "洪福科技園綜合樓",
+    //   },
+    // });
+
+    // data的第二種寫法, data是一個函數, 且要返回數據對象 (組件中必須用函數式data)
+    new Vue({
+      el: "#root",
+      /*
+        特別注意:
+          1.若使用函數式data, Vue會幫我們調用data函數, Vue就會得到返回的數據對像,從而使用
+            this是Vue的實例對象
+          2.data不要寫成箭頭函數, 要寫成普通函數, 否則this的指向就是Window
+      */
+      data() {
+        return {
+          msg: "atguigu",
+          address: "洪福科技園綜合樓",
+        };
+      },
+    });
+  </script>
+</html>
