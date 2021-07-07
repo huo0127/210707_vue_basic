@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>認識Vue</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+      1.<div id="root">是一個容器, 容器中寫得不是原始html代碼, 而是Vue的模板代碼
+      2.所謂的模板代碼, 類似於React中的jsx, 是html+js的混合體
+      3.{{xxx}}, xxx會自動讀取data中的xxx屬性
+ -->
+
+    <!-- 準備好容器  -->
+    <div id="root">
+      <h1>Hello,{{school.name.toUpperCase()}}</h1>
+      <h1>學校坐落在:{{school.address}}</h1>
+      <h1>我學的是{{school.subject()}}</h1>
+    </div>
+    <hr />
+    <!-- 展示 school.name-->
+    <h1>{{school.name,school.address}}</h1>
+    <!-- 展示 school.address-->
+    <h1>{{school.name && school.address}}</h1>
+    <!-- 展示 1 -->
+    <h1>{{school.name ? 1 : 2}}</h1>
+    <script type="text/javascript">
+      // 創建Vue的實例對象,並傳入配置對象
+      new Vue({
+        // el用於指定當前Vue實俐為哪個容器服務, 值是選擇器字符串, 選擇的寫法類似於jQuery
+        el: "#root",
+        //data是儲存數據的地方, 為root容器提供數據, 值為一個對象, 相當於React中的state
+        data: {
+          school: {
+            name: "atguigu",
+            address: "宏福科技園綜合樓",
+            subject: () => "前端",
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

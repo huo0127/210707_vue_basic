@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+      關於逗號, 賦值的問題
+      <script type="text/javascript">
+      var a = 1;
+      var b = 2;
+      var c = 3;
+      var d = 4;
+
+      //   var z = a,b,c,d  //z的值取a
+      var z = (a, b, c, d); //z的值取d
+
+      console.log(z);
+      console.log(a);
+      console.log(b);
+      console.log(c);
+      console.log(d);
+      </script> 
+
+     -->
+
+    <!-- 關於邏輯 "與" -->
+    <script type="text/javascript">
+      const a = "qwe";
+      const b = "xyz";
+
+      const x = a && b;
+      console.log(x);
+
+      // 第一個ture輸出第二個
+      // 第一個值是false , 直接返回第一個
+      // 第一個值是true, 返回第二個
+      if (a && b) {
+        console.log("@");
+      }
+    </script>
+  </body>
+</html>
