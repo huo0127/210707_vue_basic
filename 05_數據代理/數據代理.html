@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>數據代理</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
   </head>
   <body>
     <!-- 
@@ -20,5 +21,22 @@
             3.擴展思考 ---- 為什麼要先收集在_data中, 然後再代理出去?
                 更高校的監視數據 (直接收集到vm上會導致監視效率太低)
        -->
+    <div id="root">
+      <h2>學校名字: {{name}}</h2>
+      <h2>學校地址: {{address}}</h2>
+      <h2>學的是: {{subject}}</h2>
+    </div>
+    <script type="text/javascript">
+      const vm = new Vue({
+        el: "#root",
+        data: {
+          name: "atguigu",
+          address: "洪福科技園綜合樓",
+          subject: "前端",
+        },
+      });
+      console.log(vm.address); //通過vm可以讀取data中的address
+      vm.address = "北七家鎮"; //通過vm可以修改data中的address
+    </script>
   </body>
 </html>
