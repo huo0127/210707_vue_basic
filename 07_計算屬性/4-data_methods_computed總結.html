@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>data_methods_computed總結</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 準備容器 -->
+    <div id="root">
+      <h2>{{x}}</h2>
+      <h2>{{y()}}</h2>
+      <h2>{{z}}</h2>
+      <button @click="y">點我調y</button><br /><br />
+      <button @click="y()">點我調y</button><br /><br />
+      展示x的值<input type="text" v-model="x" />
+    </div>
+    <script type="text/javascript">
+      const vm = new Vue({
+        //指定vm為哪個容器服務
+        el: "#root",
+        //驅動頁面顯示的數據都放在那兒
+        data: {
+          //x最終會通過數據代理的方式放在vm身上
+          x: 100,
+        },
+        //所有用到的函數都配置在這裡
+        methods: {
+          //y直接被放在vm身上
+          y() {
+            console.log("y被調用了");
+            return 200;
+          },
+        },
+        computed: {
+          //z直接被放在vm身上了
+          z: {
+            //z的值被修改時, set執行, set中的this是vm, set會收到修改的值
+            set(value) {
+              console.log("有人修改z了, 修改的值為:", value);
+            },
+            //z的值被讀取時, 或z依賴的值發生變化時, get執行, get中的this是vm, 前提是:頁面中要要用到Z
+            get() {
+              console.log("get被調用了");
+              return this.x * 1 + 1;
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

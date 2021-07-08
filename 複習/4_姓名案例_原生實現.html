@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>姓名案例_原生實現</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      /*
+        不使用框架進行編碼時, 甚麼時候用defineProperty?
+            要追加的屬性, 來自於其他值的加工
+      */
+      let p = {
+        firstName: "張",
+        lastName: "三",
+      };
+
+      //   Object.defineProperty(p, "sex", {
+      //     set(value) {
+      //       this.sex = value;
+      //     },
+      //     get() {
+      //       return "女";
+      //     },
+      //   });
+
+      Object.defineProperty(p, "fullName", {
+        set(value) {
+          const arr = value.split("-");
+          this.firstName = arr[0];
+          this.lastName = arr[1];
+        },
+        get() {
+          return this.firstName + "-" + this.lastName;
+        },
+      });
+    </script>
+  </body>
+</html>

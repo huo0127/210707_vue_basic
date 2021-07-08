@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>數據監視_watch</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+          監視屬性watch:
+            1.當被監視的屬性變化時, 回調函數自動調用, 進行相關操作
+            2.屬性必須存在, 才能進行監視
+            3.監視的兩種寫法:
+                (1).new Vue時傳入watch配置
+                (2).通過vm.$watch監視
+            computed和watch之間的區別
+                1.只要是computed能完成的功能,watch都可以完成
+                2.watch能完成的功能, computed不一定能完成, 例如: watch可以進行異步操作
+            備註:
+                1.所有被Vue所調用(管理)的函數, 都不要寫成箭頭函數
+                2.所有不適被Vue所調用(管理)的函數, 都要寫成箭頭函數, 例如: 定時器的回調 
+                 ajax的回調
+       -->
+    <div id="root">
+      姓: <input type="text" v-model="firstName" /> <br /><br />
+      名: <input type="text" v-model="lastName" /><br /><br />
+      <span>全名: {{fullName}}</span><br /><br />
+    </div>
+    <script type="text/javascript">
+      const vm = new Vue({
+        el: "#root",
+        data: {
+          firstName: "張",
+          lastName: "三",
+          fullName: "",
+        },
+        watch: {
+          /*
+            1.watch中的firstName甚麼時候調用? data中的firstName被改變時調用
+            2.watch中的firstName的this是誰?? ---vm
+          */
+          //監測姓----精簡寫法
+          //   firstName(newValue, oldValue) {
+          //     // console.log("firstName被別人改了", newValue, oldValue);
+          //     this.fullName = newValue + "-" + this.lastName;
+          //   },
+
+          //監測姓----完整寫法
+          //   firstName: {
+          //     //若immediate為true則handler在初始化時, 就會調用一次, 以後就看firstName的改變了
+          //     immediate: true,
+          //     handler(newValue, oldValue) {
+          //       this.fullName = newValue + "-" + this.lastName;
+          //     },
+          //   },
+
+          //監測名----精簡寫法
+          lastName(newValue, oldValue) {
+            // console.log("firstName被別人改了", newValue, oldValue);
+            this.fullName = this.firstName + "-" + newValue;
+          },
+        },
+      });
+
+      vm.$watch("firstName", {
+        //若immediate為true則handler在初始化時, 就會調用一次, 以後就看firstName的改變了
+        immediate: true,
+        handler(newValue, oldValue) {
+          //此處定時器的回調一定要寫成箭頭函數
+          //箭頭函數沒有自己的this, 所以往外找, 找到了handler的this, handler的this就是vm
+          setTimeout(() => {
+            this.fullName = newValue + "-" + this.lastName;
+          }, 1000);
+        },
+      });
+    </script>
+  </body>
+</html>

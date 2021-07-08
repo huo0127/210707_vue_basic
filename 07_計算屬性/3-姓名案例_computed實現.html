@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>姓名案例_computed實現</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+          1.計算屬性: 要顯示的數據不存在, 要通過計算得來
+          2.fullName函數底層用到的是對象setter和getter方法
+          3.執行的時機:
+            (1).初始顯示會執行一次, 得到初始值去顯示
+            (2).當依賴的數據產生改變時會再次調用
+          4.優勢: 與methods實現相比, 內部有緩存機制, 效率更高
+          5.備註: 計算屬性是用於直接讀取使用的, 不要加()
+          6.在 {{}} 插值語法內沒有寫() => data,computed
+                               有寫() => methods
+       -->
+    <!-- 準備好容器 -->
+    <div id="root">
+      姓: <input type="text" v-model="firstName" /> <br /><br />
+      名: <input type="text" v-model="lastName" /> <br /><br />
+      <span>全名叫做 {{fullName}}</span><br /><br />
+      全名叫做: <input type="text" v-model="fullName" />
+    </div>
+
+    <script type="text/javascript">
+      new Vue({
+        el: "#root",
+        data: {
+          firstName: "張",
+          lastName: "三",
+        },
+        computed: {
+          /*
+                1.fullName是誰在調用? ---Vue
+                2.fullName甚麼時候調用? 1.初次渲染時調用 2.當依賴的屬性值發生變化
+         */
+          //簡寫 (函數)---相當於只指定了get, 沒有指定set
+          //   fullName() {
+          //     console.log("fullName");
+          //     return this.firstName + "-" + this.lastName;
+          //   },
+
+          //完整寫法 (對象)---set和get都指定了
+          fullName: {
+            set(value) {
+              //fullName被修改時set被調用, set中的this是vm, set會收到修改的值
+              const arr = value.split("-");
+              this.firstName = arr[0];
+              this.lastName = arr[1];
+            },
+            get() {
+              //fullName被修改時get被調用, get中的this是Vm
+              console.log("get");
+              return this.firstName + "-" + this.lastName;
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
