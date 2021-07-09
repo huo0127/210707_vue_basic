@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>引出生命週期</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <h2 :style="{opacity}">Vue學不會怎麼辦????</h2>
+      <button @click="death">學阿不然怎麼辦</button>
+    </div>
+    <script type="text/javascript">
+      new Vue({
+        el: "#root",
+        data: {
+          opacity: 1,
+        },
+        methods: {
+          death() {
+            this.$destroy(); //vm還在, 只是vm不管理root容器內的數據了, 數據的監聽也沒了
+          },
+        },
+        //vm掛載完畢
+        mounted() {
+          this.timer = setInterval(() => {
+            console.log("定時器的回調正在執行");
+            this.opacity -= 0.01;
+            if (this.opacity < 0) this.opacity = 1;
+          }, 16);
+        },
+        //vm將要銷毀
+        beforeDestroy() {
+          clearInterval(this.timer);
+        },
+      });
+    </script>
+  </body>
+</html>
