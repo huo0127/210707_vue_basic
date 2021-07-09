@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>事件</title>
+  </head>
+  <body>
+    <input type="text" id="shuru" />
+    <script type="text/javascript">
+      // React是合成事件, 所以可以隨時拿到數據 onchange / onChange
+      // Vue和 JS 都需要失去焦點才能拿到數據
+      const shuru = document.getElementById("shuru");
+      shuru.addEventListener("change", () => {
+        console.log("@");
+      });
+    </script>
+  </body>
+</html>

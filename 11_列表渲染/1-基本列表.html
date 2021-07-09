@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <title>列表渲染</title>
+  </head>
+  <body>
+    <!-- 
+          v-for指令:
+            1.用於展示列表數據
+            2.語法: v-for="(item,index) in arr" :key="item.id"
+            3.可遍歷: 數組、對象、字符串
+       -->
+    <div id="root">
+      <ul>
+        <!-- 使用v-for遍歷數組 -->
+        <h2>人員訊息</h2>
+        <li v-for="(p,index) in persons" :key="p.id">
+          {{p.name}}--{{p.gender}}--{{p.age}}歲
+        </li>
+        <!-- 使用v-for遍歷對象 -->
+        <h2>車輛訊息</h2>
+        <ul>
+          <li v-for="(value,key) in car" :key="key">{{value}}</li>
+        </ul>
+        <!-- 使用v-for遍歷字符串 -->
+        <li v-for="(data,index) in str" :key="index">{{data}}---{{index}}</li>
+      </ul>
+    </div>
+    <script type="text/javascript">
+      new Vue({
+        el: "#root",
+        data: {
+          persons: [
+            { id: "001", name: "老劉", age: 20, gender: "male" },
+            { id: "002", name: "老李", age: 21, gender: "female" },
+            { id: "003", name: "老許", age: 22, gender: "male" },
+            { id: "004", name: "老張", age: 23, gender: "female" },
+          ],
+          car: {
+            name: "benz c63",
+            price: "60萬",
+            color: "gray",
+          },
+          str: "abcde",
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <title>列表渲染</title>
+  </head>
+  <body>
+    <!-- 
+        想要對數據加工後再展示, 且不想破壞原數據, 最好用 computed
+     -->
+    <div id="root">
+      <h2>人員訊息</h2>
+        <input v-model="keyWord" type="text" placeholder="輸入名字">
+      <ul>
+        <li v-for="(p,index) in fmtPersons" :key="p.id">
+          {{p.name}}--{{p.gender}}--{{p.age}}歲
+        </li>
+    </div>
+    <script type="text/javascript">
+      new Vue({
+        el: "#root",
+        data: {
+          keyWord:'',
+          persons: [
+            { id: "001", name: "馬冬梅", age: 35, gender: "female" },
+            { id: "002", name: "周冬雨", age: 20, gender: "female" },
+            { id: "003", name: "周杰倫", age: 41, gender: "male" },
+            { id: "004", name: "柯有倫", age: 42, gender: "male" }
+          ],
+        },
+        // 使用computed過濾, 優勢: 不影響原數據
+        computed:{
+          fmtPersons(){
+            const {persons,keyWord} = this
+            return persons.filter( p => p.name.indexOf(keyWord) !== -1)
+          }
+        }
+        // 在watch中修改原數據, 會導致原數據的丟失
+        // watch:{
+        //   keyWord(value){
+        //    const arr = this.persons.filter(p=>p.name.indexOf(value) !== -1)
+        //       this.persons = arr;
+        //   }
+        // }
+      });
+    </script>
+  </body>
+</html>
