@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+      .picture {
+        width: 100px;
+      }
+      /* 離開的起點, 進入的終點 */
+      .quiku-leave,
+      .quiku-enter-to {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+      /* 離開的終點, 進入的起點 */
+      .quiku-leave-to,
+      .quiku-enter {
+        transform: scale(0.2) rotate(180deg);
+      }
+      /*離開中, 進入中*/
+      .quiku-leave-active,
+      .quiku-enter-active {
+        transition: 1s all linear;
+      }
+    </style>
+    <title>過度案例_Vue實現</title>
+  </head>
+  <body>
+    <!-- 
+          1. 基本編碼
+            (1). 在目標元素外面包裹   <transition name="xxx">
+            (2). 編寫樣式:
+                    進入:
+                        進入的起始點(xxx-enter)
+                        進入的過程中(xxx-enter-active)
+                        進入的結束點(xxx-enter-to)
+                    離開:
+                         離開的起始點(xxx-leave)
+                        離開的過程中(xxx-leave-active)
+                        離開的結束點(xxx-leave-to)
+       -->
+    <div id="root">
+      <button @click="isShow = !isShow">切換</button><br /><br />
+      <transition name="quiku">
+        <img
+          v-show="isShow"
+          class="picture"
+          src="https://s3.ax1x.com/2020/12/13/reC1IA.jpg"
+        />
+      </transition>
+    </div>
+    <script type="text/javascript">
+      new Vue({
+        el: "#root",
+        data: {
+          isShow: true,
+        },
+      });
+    </script>
+  </body>
+</html>

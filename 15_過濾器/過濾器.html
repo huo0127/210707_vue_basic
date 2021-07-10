@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>過濾器</title>
+    <script type="text/javascript" src="../js/moment.min.js"></script>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+        1. 理解過濾器
+              功能: 對要顯示的數據進行特定的初始化
+              !注意: 不改變原數據, 而是產生新數據
+        2. 編碼
+              1). 定義過濾器
+                    Vue.filter(過濾器名字, function(value,[arg1,arg2,...]){
+                    *  進行一定的數據處理
+                      return new value
+                     }) 
+              2). 使用過濾器
+                    <div>{{mydata|filerName}}</div>
+                    <div>{{mydata|filerName(arg)}}</div>
+            -->
+
+    <div id="root">
+      <h2>顯示格式化的時間</h2>
+      <h3>{{time|dateFormater}}</h3>
+      <h3>{{time|dateFormater('YYYY-MM-DD HH:mm:ss')}}</h3>
+    </div>
+    <div id="root2">
+      <h2>顯示格式化的時間</h2>
+      <h3>{{time|dateFormater}}</h3>
+      <h3>{{time|dateFormater('YYYY-MM-DD HH:mm:ss')}}</h3>
+    </div>
+    <script type="text/javascript">
+      // 註冊的過濾器
+      Vue.filter("dateFormater", function (value, str = "YYYY-MM-DD") {
+        return moment(value).format(str);
+      });
+      new Vue({
+        el: "#root",
+        data: {
+          time: Date.now(),
+        },
+      });
+      new Vue({
+        el: "#root2",
+        data: {
+          time: Date.now(),
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>常用的指令</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+          常用內置指令
+          v-text     : 更新元素的innerText
+          v-html     : 更新元素的innerHTML
+          v-if       : 條件渲染(動態控制節點是否存在)
+          v-else     : 條件渲染(動態控制節點是否存在)
+          v-show     : 條件渲染(動態控制display)
+          v-for      : 遍歷數組 / 對象
+          v-bind:xxx : 強制綁定解析表達式, 可簡寫為 :xxx
+          v-model    : 雙向數據綁定
+    -->
+    <div id="root">
+      <a :href="url" v-text="title"></a>
+      <div v-html="htmlStr"></div>
+    </div>
+    <script type="text/javascript">
+      new Vue({
+        el: "#root",
+        data: {
+          url: "http://www.atguigu.com",
+          title: "點我去學習",
+          htmlStr: `<h4>歡迎來到尚硅谷</h4>`,
+        },
+      });
+    </script>
+  </body>
+</html>
