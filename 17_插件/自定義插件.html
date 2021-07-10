@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>自定義插件</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript" src="./atguigu.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <h2>{{name}}</h2>
+      <h2>{{$random(2,8)}}</h2>
+    </div>
+    <script type="text/javascript">
+      /*
+        插件的定義: 是一個包含install方法的對象
+    */
+      Vue.config.productionTip = false;
+
+      //Vue會幫我們去調用atguigu這個插件裡的install方法
+      Vue.use(atguigu);
+
+      console.log(Vue.productName);
+      console.log(Vue.MyVersion);
+      Vue.showInfo();
+
+      new Vue({
+        el: "#root",
+        data: {
+          name: "atGuigu",
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>解釋data為啥要寫成函數</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      //如下寫法, 一旦改變, 所有的data屬性都會改變
+      //   const obj = {
+      //     data: {
+      //       name: "tom",
+      //     },
+      //   };
+      //   const x = obj.data;
+      //   x.name = "jack";
+      //   console.log(x.name);
+      //   const y = obj.data;
+      //   console.log(y.name);
+
+      //如下寫法, 互相不影響
+      const obj = {
+        data() {
+          return {
+            name: "tom",
+          };
+        },
+      };
+
+      const x = obj.data();
+      x.name = "jack";
+      console.log(x.name);
+      const y = obj.data();
+      console.log(y.name);
+    </script>
+  </body>
+</html>

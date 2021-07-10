@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>自定義指令</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+          需求: 自定義兩個指令
+            1. 功能類型v-text, 但轉換為全大寫　v-upper-text
+            1. 功能類型v-text, 但轉換為全小寫　v-lower-text
+       -->
+    <div id="root">
+      <h2 v-upper-text="name"></h2>
+      <h2 v-lower-text="name"></h2>
+    </div>
+
+    <script type="text/javascript">
+      Vue.config.productionTip = false;
+
+      //定義一個指令----全局定義
+      Vue.directive("upper-text", function (el, binding) {
+        el.innerText = binding.value.toUpperCase();
+      });
+
+      new Vue({
+        el: "#root",
+        data: {
+          name: "atGuiGu",
+        },
+        //定義一個指令----局部定義
+        directives: {
+          "lower-text"(el, binding) {
+            el.innerText = binding.value.toLowerCase();
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
