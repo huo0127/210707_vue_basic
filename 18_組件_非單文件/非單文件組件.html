@@ -28,8 +28,7 @@
          定義一個school組件:
              1. 如何定義一個組件? --- 使用Vue.extend(options)去創建
              2. School的本質是一個構造函數, 我們以後去寫<School /> Vue幫我們去new School
-             3. Vue extend(options)中的options是配置對象, 這個配置對象幾乎和new Vue時的那個
-                options一樣, 區別如下:
+             3. Vue extend(options)中的options是配置對象, 這個配置對象幾乎和new Vue時的那個 options一樣, 區別如下:
                      (1). 不能寫el去指定容器
                              原因: 所有組件實例最終要被一個vm所管理, vm中會指定好el, 即: 組件放入哪個容器
                      (2). data必須寫成函數
@@ -40,8 +39,7 @@
             4.所有組件後定義後, 必須註冊才能使用, 註冊分為: 全局註冊, 局部註冊
             5.特別注意:
                 (1). School確實是構造函數, 但不是我們親手寫的School, 是Vue.extend生成的
-                (2). Vue.extend調用的返回值是VueComponent構造函數, 所以new School其實就是在
-                     new VueComponent
+                (2). Vue.extend調用的返回值是VueComponent構造函數, 所以new School其實就是在 new VueComponent
                 (3). 所謂組件實例, 就是VueComponent的實例, 簡稱 vc
                      所謂Vue實例, 就是Vue創建的實例, 簡稱 vm
             6.一個最最最最最重要的關係
