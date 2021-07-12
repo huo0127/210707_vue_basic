@@ -17,13 +17,10 @@
             3. 寫組件標籤
        -->
     <div id="root">
-      <School></School>
-      <Hello></Hello>
+      <App></App>
     </div>
 
     <script type="text/javascript">
-      Vue.config.productionTip = false;
-
       /*
          定義一個school組件:
              1. 如何定義一個組件? --- 使用Vue.extend(options)去創建
@@ -42,24 +39,46 @@
                 (2). Vue.extend調用的返回值是VueComponent構造函數, 所以new School其實就是在 new VueComponent
                 (3). 所謂組件實例, 就是VueComponent的實例, 簡稱 vc
                      所謂Vue實例, 就是Vue創建的實例, 簡稱 vm
+                (4).組件的data函數以及methods中配置的函數中this都是vc
             6.一個最最最最最重要的關係
                 VueComponent繼承了Vue, 所以vue.prototype上的屬性和方法, vc都可以看見
        */
+      Vue.config.productionTip = false;
+      //向Vue的原型對象上追加一個xyz屬性 值為1
+      Vue.prototype.xyz = 1;
 
+      //定義一個Hello組件
+      const Hello = Vue.extend({ template: `<h2>Hello</h2>` });
+
+      //定義一個School組件
       const School = Vue.extend({
         //data中存放組件所需數據
         data() {
+          console.log("@", this);
           return { name: "atguigu", address: "北七家鎮-洪福科技園" };
+        },
+        methods: {
+          showAddress() {
+            console.log(this);
+          },
         },
         //template中配置組件的模板結構
         template: ` <div>
             <h2>學校的名字: {{name}}</h2>
-            <h2>學校地址: {{address}}</h2>
+            <h2 @click="showAddress">學校地址: {{address}}</h2>
         </div>`,
       });
-      Vue.prototype.xyz = 1;
-      //定義一個Hello組件
-      const Hello = Vue.extend({ template: `<h2>Hello</h2>` });
+
+      const App = Vue.extend({
+        components: { School, Hello },
+        template: `
+        <div>
+          <Hello/>
+          <School/>
+        </div>
+        `,
+      });
+
       //註冊school組件----全局註冊
       //   Vue.component("School", School);
 
@@ -68,8 +87,7 @@
         el: "#root",
         //註冊School組件----局部註冊----以後工作用的多
         components: {
-          School,
-          Hello,
+          App,
         },
       });
       console.log(vm);
