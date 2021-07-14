@@ -4,20 +4,24 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>常用的指令</title>
+    <title>v-text指令</title>
     <script type="text/javascript" src="../js/vue.js"></script>
   </head>
   <body>
     <!-- 
           常用內置指令
-          v-text     : 更新元素的innerText
-          v-html     : 更新元素的innerHTML
+          v-text     : 更新元素的innerText 不支持結構解析
+          v-html     : 更新元素的innerHTML 支持結構解析
           v-if       : 條件渲染(動態控制節點是否存在)
           v-else     : 條件渲染(動態控制節點是否存在)
           v-show     : 條件渲染(動態控制display)
           v-for      : 遍歷數組 / 對象
           v-bind:xxx : 強制綁定解析表達式, 可簡寫為 :xxx
           v-model    : 雙向數據綁定
+          
+          v-text指令:
+            1. 作用: 向其所在的節點中渲染文本內容
+            2. 與插值語法的區別: v-text會替換掉節點中的內容, {{XX}}則不會
     -->
     <div id="root">
       <a :href="url" v-text="title"></a>
